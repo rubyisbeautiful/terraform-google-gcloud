@@ -25,11 +25,14 @@ locals {
   download_override = var.enabled ? data.external.env_override[0].result.download : ""
   skip_download     = local.download_override == "always" ? false : (local.download_override == "never" ? true : var.skip_download)
 
-  gcloud              = local.skip_download ? "gcloud" : "${local.gcloud_bin_path}/gcloud"
+  gcloud              = local.skip_download
+    ? len(local.gcloud_bin_abs_path) == 0
+          ? "gcloud"
+          : "${local.gcloud_bin_path}/gcloud"
+    : "${var.gcloud_bin_path}/gcloud"
   gcloud_download_url = var.gcloud_download_url != "" ? var.gcloud_download_url : "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${var.gcloud_sdk_version}-${var.platform}-x86_64.tar.gz"
   jq_platform         = var.platform == "darwin" ? "osx-amd" : var.platform
   jq_download_url     = var.jq_download_url != "" ? var.jq_download_url : "https://github.com/stedolan/jq/releases/download/jq-${var.jq_version}/jq-${local.jq_platform}64"
-
   create_cmd_bin  = local.skip_download ? var.create_cmd_entrypoint : "${local.gcloud_bin_path}/${var.create_cmd_entrypoint}"
   destroy_cmd_bin = local.skip_download ? var.destroy_cmd_entrypoint : "${local.gcloud_bin_path}/${var.destroy_cmd_entrypoint}"
 

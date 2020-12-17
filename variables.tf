@@ -100,6 +100,11 @@ variable "gcloud_download_url" {
   default     = ""
 }
 
+variable "gcloud_bin_path" {
+  default     = ""
+  description = "Path to the bin/ dir of an already-present gcloud install"
+}
+
 variable "jq_download_url" {
   description = "Custom jq download url. Optional."
   type        = string

@@ -49,6 +49,7 @@ Setting it to `never` will *never* gcloud download and setting it to `always` wi
 | destroy\_cmd\_body | On destroy, the command body you'd like to run with your entrypoint. | string | `"info"` | no |
 | destroy\_cmd\_entrypoint | On destroy, the command entrypoint you'd like to use.  Can also be set to a custom script. Module's bin directory will be prepended to path. | string | `"gcloud"` | no |
 | enabled | Flag to optionally disable usage of this module. | bool | `"true"` | no |
+| gcloud\_bin\_path | Path to the bin/ dir of an already-present gcloud install | string | `""` | no |
 | gcloud\_download\_url | Custom gcloud download url. Optional. | string | `""` | no |
 | gcloud\_sdk\_version | The gcloud sdk version to download. | string | `"281.0.0"` | no |
 | jq\_download\_url | Custom jq download url. Optional. | string | `""` | no |
